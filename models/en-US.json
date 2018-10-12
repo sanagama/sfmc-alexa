@@ -1,0 +1,52 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "marketing cloud",
+      "types": [
+
+      ],
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "HelloWorldIntent",
+          "slots": [],
+          "samples": [
+            "say hello",
+            "say hi",
+            "say hi to Marketing Cloud",
+            "hello Marketing Cloud"
+          ]
+        },
+        {
+          "name": "ConnectIntent",
+          "slots": [],
+          "samples": [
+            "connect",
+            "open Marketing Cloud",
+            "open Marketing Cloud connection",
+            "connect to Marketing Cloud",
+            "tell Marketing Cloud to connect",
+            "ask Marketing Cloud to connect"
+          ]
+        }        
+      ]
+    }
+  }
+}
