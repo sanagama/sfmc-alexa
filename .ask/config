@@ -8,7 +8,8 @@
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "ask-custom-Marketing-Cloud-default"
+                "uri": "https://988bad49.ngrok.io",
+                "sslCertificateType": "Wildcard"
               }
             }
           }
@@ -16,13 +17,14 @@
       },
       "resources": {
         "manifest": {
-          "eTag": "2eeccd6e7ea1e064413a511c75709cb1"
+          "eTag": "08f8ae8ae9303bbbf8de2d4930db8faf"
         },
         "interactionModel": {
           "en-US": {
             "eTag": "aa800c5d61d9fd8fa8c4b55f53ae1979"
           }
         },
+
         "lambda": [
           {
             "arn": "arn:aws:lambda:us-east-1:446086639393:function:ask-custom-Marketing-Cloud-default",
@@ -31,9 +33,10 @@
             "alexaUsage": [
               "custom/default"
             ],
-            "revisionId": "0d9ed50f-69f0-4bb8-b4e8-f035faf6c017"
+            "revisionId": "b9398ea0-6909-463f-9eca-2c188f2e6edb"
           }
         ]
+        
       }
     }
   }

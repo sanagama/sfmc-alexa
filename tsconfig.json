@@ -11,6 +11,7 @@
     "sourceMap": false,
     "allowJs": false,
     "noImplicitAny": true,
+    "noUnusedLocals": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
     "noImplicitReturns": true,
@@ -20,6 +21,7 @@
     "strict": true
   },
   "exclude": [
-    "/**/node_modules"
+    "/**/node_modules",
+    "lambda/local/"
   ]
 }
