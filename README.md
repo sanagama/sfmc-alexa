@@ -17,8 +17,8 @@ Add an `API Integration` component in Marketing Cloud.
 #### Put the API Key in Environment Variables
 
 Get the `ClientID` and `ClientSecret` from API Integration component and put in the environment variables below on your local computer:
-    - `SFMC_API_CLIENTID=YOUR_CLIENTID`
-    - `SFMC_API_CLIENTSECRET=YOUR_CLIENTSECRET`
+- `SFMC_API_CLIENTID=YOUR_CLIENTID`
+- `SFMC_API_CLIENTSECRET=YOUR_CLIENTSECRET`
 
 See [Get an API Key](https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-getting-started.meta/mc-getting-started/get-api-key.htm) for more details.
 
@@ -33,12 +33,12 @@ Install these on your local computer (skip what you already have!)
 - [Git](https://git-scm.com/downloads)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - [Node.js](https://nodejs.org/en/download/)
-- [ngrok](https://ngrok.com/download) and unzip into your `HOME` folder
+- Download [ngrok](https://ngrok.com/download) and unzip into your `HOME` folder
 
 Next:
 - Register for an [AWS Account](https://aws.amazon.com/)
 - Register for an [Amazon Developer Account](https://developer.amazon.com/)
-- Chech out the [Alexa Skills Kit Developer Console](https://developer.amazon.com/alexa/console/ask)
+- Check out the [Alexa Skills Kit Developer Console](https://developer.amazon.com/alexa/console/ask)
 - Install and setup [ASK CLI](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html)
 
 > *NOTE:* Use the `default` profile when you setup the `ASK CLI`
@@ -119,7 +119,7 @@ with the `HTTPS` endpoint you got from `ngrok`, e.g.:
 $ npm run-script deploy:skill
 ```
 
-Alternately, you can do this manually in the Alexa Developer Console if you wish:
+Alternately, you can do this manually in the [Alexa Skills Kit Developer Console](https://developer.amazon.com/alexa/console/ask) if you wish:
 
 - Go to [your skill's dashboard](https://developer.amazon.com/alexa/console)
 - Select `Endpoint`
@@ -136,7 +136,7 @@ Alternately, you can do this manually in the Alexa Developer Console if you wish
 $ npm start
 ```
 
-This will start the `Express` server locally on your computer. And `nodemon` will automatically transpile and publish any files you change during development or debugging.
+This will start the `Express` server locally on your computer. And `nodemon` will automatically transpile and deploy any files you change during development or debugging.
 
 ## Deployment
 
@@ -154,13 +154,13 @@ To see the actual commands, check the file `package.json`.
 
 | Command | Description |
 | --- | --- |
-| `start` | Starts the local `Express` server locall using `nodemon`, so you can call your API endpoints on http://localhost |
+| `start` | Starts the local `Express` server locall using `nodemon`, so you can call your API endpoints on http://localhost:3000 |
 | `clean` | Deletes the `dist` folder |
 | `build` | Does `clean` and builds sources (Lambda & local `Express` server) and puts `js` files in the `dist` folder |
 | `deploy` | Does `build` and uses `ASK CLI` to deploy everything (skill, model, Lambda) to AWS |
 | `deploy:force` | Does `build` and uses `ASK CLI` to deploy everything (skill, model, Lambda) to AWS. Useful if you want to overwrite the model in AWS with your local model if they are different |
 | `deploy:lambda` | Does `build` and uses `ASK CLI` to deploy *only* the Lambda function AWS |
-| `deploy:skill` | Deploys the skill details for the `default` profile, which will update the HTTPS endpoint |
+| `deploy:skill` | Deploys the skill details for the `default` profile, which also updates the `HTTPS` endpoint that the skill uses |
 
 ## Useful resources
 
