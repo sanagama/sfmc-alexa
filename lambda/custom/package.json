@@ -22,6 +22,7 @@
 
   "devDependencies": {
     "@types/node": "^10.5.2",
+    "@types/shortid": "0.0.29",
     "ts-node": "^7.0.1",
     "gulp": "^3.9.1",
     "gulp-typescript": "^5.0.0-alpha.3",
@@ -29,6 +30,8 @@
   },
   "dependencies": {
     "ask-sdk": "^2.1.0",
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "shortid": "^2.2.13",
+    "winston": "^3.1.0"
   }
 }

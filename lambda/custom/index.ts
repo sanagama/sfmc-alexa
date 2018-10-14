@@ -1,7 +1,7 @@
 import * as  Alexa from 'ask-sdk'
 import * as Handlers from './handlers/default'
 import { HelloWorldIntentHandler } from './handlers/helloWorld'
-import { ConnectIntentHandler } from './handlers/connect'
+import { MCConnectIntentHandler } from './handlers/mcconnect'
 
 export const handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
@@ -10,7 +10,7 @@ export const handler = Alexa.SkillBuilders.custom()
         Handlers.CancelAndStopIntentHandler,
         Handlers.SessionEndedRequestHandler,
         HelloWorldIntentHandler,
-        ConnectIntentHandler
+        MCConnectIntentHandler
     )
     .addErrorHandlers(Handlers.Default)
     .lambda();

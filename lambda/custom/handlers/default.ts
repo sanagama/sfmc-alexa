@@ -1,17 +1,19 @@
 import * as  Alexa from 'ask-sdk'
-import Strings from '../strings'
+import Constants from '../Constants'
+import Utils from '../Utils';
 
 export const LaunchRequestHandler: Alexa.RequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speechText = Strings.Welcome;
+        Utils.logInfo('LaunchRequestHandler called');
 
+        const speechText = Constants.txtWelcome;
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
-            .withSimpleCard(Strings.CardTitle, speechText)
+            .withSimpleCard(Constants.txtCardTitle, speechText)
             .getResponse();
     }
 };
@@ -22,12 +24,13 @@ export const HelpIntentHandler: Alexa.RequestHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speechText = Strings.Help;
+        Utils.logInfo('HelpIntentHandler called');
 
+        const speechText = Constants.txtHelp;
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
-            .withSimpleCard(Strings.CardTitle, speechText)
+            .withSimpleCard(Constants.txtCardTitle, speechText)
             .getResponse();
     }
 };
@@ -39,11 +42,12 @@ export const CancelAndStopIntentHandler: Alexa.RequestHandler = {
                 || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speechText = Strings.GoodBye;
+        Utils.logInfo('CancelAndStopIntentHandler called');
 
+        const speechText = Constants.txtGoodBye;
         return handlerInput.responseBuilder
             .speak(speechText)
-            .withSimpleCard(Strings.CardTitle, speechText)
+            .withSimpleCard(Constants.txtCardTitle, speechText)
             .getResponse();
     }
 };
@@ -53,7 +57,7 @@ export const SessionEndedRequestHandler: Alexa.RequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
     },
     handle(handlerInput) {
-        //any cleanup logic goes here
+        Utils.logInfo('SessionEndedRequestHandler called');
         return handlerInput.responseBuilder.getResponse();
     }
 };
@@ -63,11 +67,11 @@ export const Default: Alexa.ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        console.log(`Error handled: ${error.message}`);
+        Utils.logError("Error handled: " + error.message);
 
         return handlerInput.responseBuilder
-            .speak('Sorry, I didn\'t understand that. Can you repeat?')
-            .reprompt('Sorry, I didn\'t understand that. Can you repeat?')
+            .speak(Constants.txtError)
+            .reprompt(Constants.txtError)
             .getResponse();
     },
 };

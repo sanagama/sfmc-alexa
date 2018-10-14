@@ -1,5 +1,6 @@
 import * as  Alexa from 'ask-sdk'
-import Strings from '../strings'
+import Constants from '../Constants'
+import Utils from '../Utils';
 
 export const HelloWorldIntentHandler: Alexa.RequestHandler = {
     canHandle(handlerInput) {
@@ -7,11 +8,12 @@ export const HelloWorldIntentHandler: Alexa.RequestHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
     },
     handle(handlerInput) {
-        const speechText = Strings.HelloWorld;
+        Utils.logInfo('HelloWorldIntentHandler called');
 
+        const speechText = Constants.txtHelloWorld;
         return handlerInput.responseBuilder
             .speak(speechText)
-            .withSimpleCard(Strings.CardTitle, speechText)
+            .withSimpleCard(Constants.txtCardTitle, speechText)
             .getResponse();
     }
 };
