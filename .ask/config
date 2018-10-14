@@ -23,20 +23,7 @@
           "en-US": {
             "eTag": "aa800c5d61d9fd8fa8c4b55f53ae1979"
           }
-        },
-
-        "lambda": [
-          {
-            "arn": "arn:aws:lambda:us-east-1:446086639393:function:ask-custom-Marketing-Cloud-default",
-            "functionName": "arn:aws:lambda:us-east-1:446086639393:function:ask-custom-Marketing-Cloud-default",
-            "awsRegion": "us-east-1",
-            "alexaUsage": [
-              "custom/default"
-            ],
-            "revisionId": "b9398ea0-6909-463f-9eca-2c188f2e6edb"
-          }
-        ]
-        
+        }
       }
     }
   }
