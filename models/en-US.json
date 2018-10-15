@@ -25,15 +25,14 @@
             ]
           },
           {
-            "name": "HelloWorldIntent",
+            "name": "HelloIntent",
             "slots": [
               
             ],
             "samples": [
-              "say hello",
               "say hi",
               "say hi to Marketing Cloud",
-              "hello Marketing Cloud"
+              "howdy Marketing Cloud"
             ]
           },
           {
@@ -42,14 +41,9 @@
               
             ],
             "samples": [
-              "connect",
-              "connect to MC",
-              "connect to Marketing Cloud",
               "open Marketing Cloud",
-              "open Marketing Cloud connection",
               "connect to Marketing Cloud",
-              "tell Marketing Cloud to connect",
-              "ask Marketing Cloud to connect"
+              "tell Marketing Cloud to connect"
             ]
           }
         ]
