@@ -33,7 +33,6 @@ Install these on your local computer (skip what you already have!)
 - [Git](https://git-scm.com/downloads)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - [Node.js](https://nodejs.org/en/download/)
-- Download [ngrok](https://ngrok.com/download) and unzip into your `HOME` folder
 
 Next:
 - Register for an [AWS Account](https://aws.amazon.com/)
@@ -69,16 +68,18 @@ During development, it's a pain to have to deploy your intent handler code to AW
 
 There's a better way! You can connect Alexa to your local development environment and not use AWS Lambda at all. This avoids deploying to AWS Lambda every time you make changes to your intent handler code. Your code changes are available to Alexa instantly.
 
- This approach is super useful for local debugging & testing, and for demos too!
+This approach is super useful for local debugging & testing, and for demos too!
 
-`ngrok` is the magic sauce that makes all this happen and it's free!
+There are many *free* tools that provide this magic sauce such as [ngrok](https://ngrok.com) and [Serveo](http://serveo.net).
+
+We will use [Serveo](http://serveo.net) in our case because it needs nothing other than `ssh` and lets us specify a fixed custom domain name for our Alexa skill to use.
 
 ### Here's how this works
 
 - When this prototype starts, it runs a local `Express` server on your computer
-- You run `ngrok` on your local computer to get an `HTTPS` endpoint (looks something like `https://XXXXXXXX.ngrok.io`)
-- You configure your Alexa skill to connect to this `ngrok` endpoint
-- `ngrok` proxies all Alexa requests to your local `Express` server
+- Run `ssh` on your local computer to expose `http://localhost:3000` as `https://sfmchackday2018.serveo.net` using `serveo`
+- Configure your Alexa skill to connect to `https://sfmchackday2018.serveo.net`
+- `serveo` proxies all Alexa requests to the `Express` server running on your computer
 - Your local `Express` server uses the same Lambda functions to satisfy Alexa intents
 - Life is good!
 
@@ -89,42 +90,28 @@ There's a better way! You can connect Alexa to your local development environmen
 - In VS Code, click `View -> Terminal` to open a `Terminal` window
 - In the VS Code `Terminal` window, type `npm install`
 
-### Start `ngrok`
+### Start `serveo`
 
 - In the VS Code `Terminal` window, click `+` to start a 2nd `Terminal` window
-- In the 2nd `Terminal` window, type `./run-ngrok.sh` (or `./run-ngrok.bat` for Windows)
-- This starts `ngrok` and gives you an `HTTPS` endpoint which will proxy all requests to your local server (looks something like `https://XXXXXXXX.ngrok.io`)
-- `ngrok` is happily running in this 2nd `Terminal` window. You can switch to other windows as usual
+- In the 2nd `Terminal` window, type `./run-serveo.sh` (or `./run-serveo.bat` for Windows)
+- This starts `ssh` and traffic from `https://sfmchackday2018.serveo.net` is proxied to your local server.
+- `ssh` is happily running in this 2nd `Terminal` window. You can switch to other windows as usual
 
-### Update endpoint for the Alexa skill
+### Configure the endpoint for the Alexa skill
 
-In the VS Code, open the file `.ask/config` and replace the following line in the `default` section:
-
-```json
-"uri": "<whatever is there>",
-```
-
-with the `HTTPS` endpoint you got from `ngrok`, e.g.:
-
-```json
-"uri": "https://XXXXXXXX.ngrok.io",
-```
-
-### Deploy the Alexa skill
-
-- In the VS Code terminal window, switch back to the 1st terminal window
-- Type the following command:
+- Switch back to the 1st terminal window in VS Code
+- Type the following command to deploy the Alexa skill:
 
 ```bash
-$ npm run-script deploy:skill
+$ npm run-script deploy
 ```
 
-Alternately, you can do this manually in the [Alexa Skills Kit Developer Console](https://developer.amazon.com/alexa/console/ask) if you wish:
+Alternately, you can cionfigure the endpoint manually in the [Alexa Skills Kit Developer Console](https://developer.amazon.com/alexa/console/ask) if you wish:
 
-- Go to [your skill's dashboard](https://developer.amazon.com/alexa/console)
+- Sign in to [your skill's dashboard](https://developer.amazon.com/alexa/console)
 - Select `Endpoint`
 - Select `HTTPS`
-- Enter the HTTPS url from `ngrok`
+- Under `Default Region` enter `https://sfmchackday2018.serveo.net`
 - For the `SSL certificate type` make sure you select `My development endpoint is a sub-domain of a domain that has a wildcard certificate from a certificate authority`
 
 ### Start the local `Express` server
@@ -138,16 +125,6 @@ $ npm start
 
 This will start the `Express` server locally on your computer. And `nodemon` will automatically transpile and deploy any files you change during development or debugging.
 
-## Deployment
-
-When you're finished with local development, you can use the commands below to deploy to AWS:
-
-```bash
-$ cd ~/sfmc-alexa
-$ npm install
-$ npm run-script deploy
-```
-
 ## Overview of scripts in package.json
 
 To see the actual commands, check the file `package.json`.
@@ -160,16 +137,18 @@ To see the actual commands, check the file `package.json`.
 | `deploy` | Does `build` and uses `ASK CLI` to deploy everything (skill, model, Lambda) to AWS |
 | `deploy:force` | Does `build` and uses `ASK CLI` to deploy everything (skill, model, Lambda) to AWS. Useful if you want to overwrite the model in AWS with your local model if they are different |
 | `deploy:lambda` | Does `build` and uses `ASK CLI` to deploy *only* the Lambda function AWS |
-| `deploy:skill` | Deploys the skill details for the `default` profile, which also updates the `HTTPS` endpoint that the skill uses |
 
 ## Useful resources
 
+- http://serveo.net/
+- https://ngrok.com/
+- https://alexa.amazon.com/
 - https://github.com/boobo94/alexa-skill-starter-pack-typescript
 - https://github.com/Xzya/alexa-typescript-hello-world
+- https://github.com/martinabrahams/alexa-ask-sdk-typescript-boilerplate/tree/master/src/handlers
 - https://medium.com/@cnadeau_/allow-alexa-to-run-your-locally-hosted-skill-1786e3ca7a1b
 - https://github.com/balassy/aws-lambda-typescript
 - https://ask-sdk-for-nodejs.readthedocs.io/en/latest/Developing-Your-First-Skill.html
-- https://ngrok.com/
 - https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs
 - https://developer.amazon.com/docs/smapi/ask-cli-command-reference.html
 - https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html
