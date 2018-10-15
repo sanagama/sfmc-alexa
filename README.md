@@ -145,6 +145,7 @@ To see the actual commands, check the file `package.json`.
 - https://alexa.amazon.com/
 - https://github.com/boobo94/alexa-skill-starter-pack-typescript
 - https://github.com/Xzya/alexa-typescript-hello-world
+- https://github.com/martinabrahams/alexa-ask-sdk-typescript-boilerplate/tree/master/src/handlers
 - https://medium.com/@cnadeau_/allow-alexa-to-run-your-locally-hosted-skill-1786e3ca7a1b
 - https://github.com/balassy/aws-lambda-typescript
 - https://ask-sdk-for-nodejs.readthedocs.io/en/latest/Developing-Your-First-Skill.html
