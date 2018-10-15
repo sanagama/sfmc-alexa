@@ -8,7 +8,7 @@
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "https://988bad49.ngrok.io",
+                "uri": "https://sfmchackday2018.serveo.net",
                 "sslCertificateType": "Wildcard"
               }
             }

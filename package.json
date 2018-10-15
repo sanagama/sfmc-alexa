@@ -14,7 +14,6 @@
     "build": "npm run clean && gulp",
     "deploy": "npm run build && ask deploy",
     "deploy:lambda": "npm run build && ask deploy --target lambda",
-    "deploy:skill": "ask deploy --target skill",
     "deploy:force": "npm run build && ask deploy --force"
   },
   "engines": {
