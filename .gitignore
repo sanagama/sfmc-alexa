@@ -2,7 +2,7 @@
 .DS_Store
 dist
 
-/**/.ask
+.ask/
 
 # Dependency directories
 /**/node_modules
