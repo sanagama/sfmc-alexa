@@ -1,7 +1,6 @@
 'use strict';
 
 import Utils from './Utils';
-import SfmcOauth from './SfmcOauth'
 import RestApiHelper from './RestApiHelper'
 import * as shortid from "shortid";
 import Constants from './Constants';
@@ -13,7 +12,6 @@ class SfmcApiSingleton
     // Instance variables
     private _clientId = process.env.SFMC_API_CLIENTID;
     private _clientSecret = process.env.SFMC_API_CLIENTSECRET;
-    private _sfmcOauth: SfmcOauth;
     private _sfmcRestApiHelper: RestApiHelper;
 
     /*
@@ -29,8 +27,7 @@ class SfmcApiSingleton
             throw new Error(errorMsg);
         }
 
-        this._sfmcRestApiHelper = new RestApiHelper();
-        this._sfmcOauth = new SfmcOauth(this._clientId, this._clientSecret);
+        this._sfmcRestApiHelper = new RestApiHelper(this._clientId, this._clientSecret);
     }
 
     public static get Instance()
@@ -43,23 +40,20 @@ class SfmcApiSingleton
     * Uses SFMC_API_CLIENTID and SFMC_API_CLIENTSECRET to get an OAuth Access Token
     *
     */
-    public connectToMarketingCloud() : Promise<boolean>
+    public async connectToMarketingCloud() : Promise<boolean>
     {
         let self = this;
-        return new Promise<boolean>((resolve, reject) =>
+        let oauthAccessToken = await self._sfmcRestApiHelper.getOauthAccessToken();
+        if(oauthAccessToken)
         {
-            self._sfmcOauth.getOAuthAccessToken()
-            .then((oauthAccessToken) => {
-                // success
-                Utils.logInfo("Connected to Marketing Cloud! OAuthToken: " + oauthAccessToken);
-                resolve(true);
-            })
-            .catch(() => {
-                // error
-                Utils.logError("Error connecting to Marketing Cloud - check console logs");
-                reject(false);
-            });
-        });
+            Utils.logInfo("Connected to Marketing Cloud! OAuthToken: " + oauthAccessToken);
+            return true;
+        }
+        else
+        {
+            Utils.logError("Error getting OAuth Access Token - check console logs");
+            return false;
+        }
     }
 
     /*
@@ -67,7 +61,7 @@ class SfmcApiSingleton
     * See: https://developer.salesforce.com/docs/atlas.en-us.mc-apis.meta/mc-apis/createContacts.htm
     *
     */
-    public createContact(firstName?: string, lastName?: string, email?: string) : Promise<boolean>
+    public async createContact(firstName?: string, lastName?: string, email?: string) : Promise<boolean>
     {
         let self = this;
 
@@ -82,7 +76,7 @@ class SfmcApiSingleton
             email = 'email-' + shortid.generate() + '@sanjay.com';
         } 
 
-        // POST body
+        // POST body to create new Contact
         let postBody = {
             "contactKey": 'key-' + shortid.generate(),
             "attributeSets":[{
@@ -99,27 +93,21 @@ class SfmcApiSingleton
                 }]
             }]
         };
-        
-        // Make the async call
-        return new Promise<boolean>((resolve, reject) =>
-        {
-            self._sfmcOauth.getOAuthAccessToken()
-            .then((oauthAccessToken) => {
-                Utils.logInfo("Creating new contact: " + firstName + " " + lastName + " " + email);
 
-                // Make REST API call
-                self._sfmcRestApiHelper.doPost(Constants.SfmcApiContactsUrl, postBody, oauthAccessToken)
-                .then(() => {
-                    // success
-                    Utils.logInfo("Successfully created contact");
-                    resolve(true);
-                })
-                .catch((error: any) => {
-                    // error
-                    reject(error);
-                });
-            })
-        });
+
+        // Create new Contact
+        Utils.logInfo("Creating new contact: " + firstName + " " + lastName + " " + email);
+        let response = await self._sfmcRestApiHelper.doPost(Constants.SfmcApiContactsUrl, postBody);
+        if(response.statusTxt == Constants.Success)
+        {
+            Utils.logInfo("Successfully created new contact");
+            return true;
+        }
+        else
+        {
+            Utils.logError("Error creating new Contact - check console logs");
+            return false;
+        }
     }
 
     /*
@@ -127,39 +115,31 @@ class SfmcApiSingleton
     * See: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/searchSchema.htm
     *
     */
-   public getContactCount() : Promise<number>
+   public async getContactCount() : Promise<number>
    {
        let self = this;
+       let contactCount = 0;
 
-       // POST body
-       let postBody = {
+        // POST body to get Contact count
+        let postBody = {
            // TBD
        };
      
-       // Make the async call
-       return new Promise<number>((resolve, reject) =>
-       {
-           self._sfmcOauth.getOAuthAccessToken()
-           .then((oauthAccessToken) => {
-   
-               Utils.logInfo(`Getting count of Contacts`);
-
-               // Make REST API call
-               self._sfmcRestApiHelper.doPost(Constants.SfmcApiContactsUrl, postBody, oauthAccessToken)
-               .then((response: any) => {
-                    // success
-
-                    // TBD: parse response to get count and return it
-                    let contactCount = 10;
-                    Utils.logInfo("Successfully got contact count: " + contactCount);
-                    resolve(contactCount);
-                })
-                .catch((error: any) => {
-                    // error
-                    reject(error);
-                });
-           })
-       });
+        // Get Contact Ccount
+        Utils.logInfo(`Getting count of Contacts`);
+        let response = await self._sfmcRestApiHelper.doPost(Constants.SfmcApiContactsUrl, postBody);
+        if(response.statusTxt == Constants.Success)
+        {
+            // TBD: parse 'response.data' to get count and return it
+            contactCount = 10;
+            Utils.logInfo("Successfully got Contact count: " + contactCount);
+            return contactCount;
+        }
+        else
+        {
+            Utils.logError("Error getting Contact count - check console logs");
+            return 0;
+        }
    }    
 }
 

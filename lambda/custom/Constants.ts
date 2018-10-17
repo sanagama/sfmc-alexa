@@ -1,6 +1,11 @@
 
 export default class Constants
 {
+    // HTTP 500 = internal server error
+    public static Success = "success";
+    public static Error = "error";
+    public static Http500 = 500;
+
     // SFMC REST API URLs
     public static SfmcApiBaseUrl = "https://www.exacttargetapis.com";
     public static SfmcApiAuthServiceUrl = "https://auth.exacttargetapis.com/v1/requestToken";
