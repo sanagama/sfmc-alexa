@@ -9,7 +9,7 @@ export default class Constants
     // SFMC REST API URLs
     public static SfmcApiBaseUrl = "https://www.exacttargetapis.com";
     public static SfmcApiAuthServiceUrl = "https://auth.exacttargetapis.com/v1/requestToken";
-    public static SfmcMetricTestUrl = Constants.SfmcApiBaseUrl + "/platformservice-internal/v1/data/metrics/MOBILE_CONNECT_SEND_COUNTS/datasets/TotalCount";
+    public static SfmcMetricTestUrl = Constants.SfmcApiBaseUrl + "/platform-internal/v1/data/metrics/MOBILE_CONNECT_SEND_COUNTS/datasets/TotalCount";
     public static SfmcApiContactsUrl = Constants.SfmcApiBaseUrl + "/contacts/v1/contacts";
 
     // Strings
