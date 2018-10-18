@@ -3,6 +3,7 @@
 dist
 
 .ask/
+skills.json
 
 # Dependency directories
 /**/node_modules
