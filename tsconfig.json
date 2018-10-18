@@ -8,7 +8,7 @@
     "moduleResolution": "node",
     "rootDir": "lambda",
     "outDir": "dist",
-    "sourceMap": false,
+    "sourceMap": true,
     "allowJs": false,
     "noImplicitAny": true,
     "noUnusedLocals": true,
@@ -21,7 +21,6 @@
     "strict": true
   },
   "exclude": [
-    "/**/node_modules",
-    "lambda/local/"
+    "/**/node_modules"
   ]
 }
