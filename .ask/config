@@ -1,14 +1,14 @@
 {
   "deploy_settings": {
     "default": {
-      "skill_id": "amzn1.ask.skill.99dac758-13d6-4570-949e-8fffbdb0c165",
+      "skill_id": "amzn1.ask.skill.c706287f-a18e-414e-bad6-999c6ed2afc6",
       "was_cloned": false,
       "merge": {
         "manifest": {
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "https://sfmchackday2018.serveo.net",
+                "uri": "https://sfmchackday2019.serveo.net",
                 "sslCertificateType": "Wildcard"
               }
             }
@@ -17,11 +17,11 @@
       },
       "resources": {
         "manifest": {
-          "eTag": "26569855a7db8a32c0504ab576a1666f"
+          "eTag": "0067304656ae88cb28493e071288637e"
         },
         "interactionModel": {
           "en-US": {
-            "eTag": "345c512fe7e989dd6d2f151b66d32c96"
+            "eTag": "61b2f6abaf00ea3d39c776906a7fc78e"
           }
         }
       }

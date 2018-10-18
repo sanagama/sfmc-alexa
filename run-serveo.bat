@@ -1,1 +1,1 @@
-ssh -R sfmchackday2018.serveo.net:443:localhost:3000 serveo.net
+ssh -R sfmchackday2019.serveo.net:443:localhost:3000 serveo.net

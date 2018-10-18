@@ -1,6 +1,6 @@
 import * as  Alexa from 'ask-sdk'
 
-// Suppot for built-in Alexa handlers
+// Support for built-in Alexa handlers
 import { LambdaHandler } from "ask-sdk-core/dist/skill/factory/BaseSkillFactory";
 import { LaunchRequestHandler } from "./handlers/LaunchRequestHandler";
 import { CancelAndStopIntentHandler } from "./handlers/CancelAndStopIntentHandler";
@@ -9,8 +9,9 @@ import { SessionEndedHandler } from "./handlers/SessionEndedHandler";
 import { CustomErrorHandler } from "./handlers/CustomErrorHandler";
 
 // Our custom handlers
-import { HelloIntentHandler } from './handlers/HelloIntentHandler'
-import { SfmcConnectIntentHandler } from './handlers/SfmcConnectIntentHandler'
+import { HelloIntentHandler } from './handlers/HelloIntentHandler';
+import { SfmcConnectIntentHandler } from './handlers/SfmcConnectIntentHandler';
+import { SfmcMetricIntentHandler } from './handlers/SfmcMetricIntentHandler';
 
 
 function buildLambdaSkill(): LambdaHandler
@@ -24,10 +25,11 @@ function buildLambdaSkill(): LambdaHandler
             new SessionEndedHandler(),
             
             new HelloIntentHandler(),
-            new SfmcConnectIntentHandler()
+            new SfmcConnectIntentHandler(),
+            new SfmcMetricIntentHandler()
 
             //
-            // TBD: Register more intent classed here
+            // TBD: Register more intent classes here
             //
         )
         .addErrorHandlers(new CustomErrorHandler())

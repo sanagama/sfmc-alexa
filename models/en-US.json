@@ -45,6 +45,17 @@
               "connect to Marketing Cloud",
               "tell Marketing Cloud to connect"
             ]
+          },
+          {
+            "name": "MetricIntent",
+            "slots": [
+              
+            ],
+            "samples": [
+              "test metric",
+              "how many messages did I send yesterday",
+              "show me the money"
+            ]
           }
         ]
       }

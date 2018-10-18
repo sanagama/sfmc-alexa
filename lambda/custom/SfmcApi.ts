@@ -56,6 +56,33 @@ class SfmcApiSingleton
         }
     }
 
+    public async getMetricTest() : Promise<number>
+    {
+        let self = this;
+        let metricCount = 0;  
+
+        // POST empty body
+        let postBody = {
+            // TBD
+        };
+
+         // Get Metric
+         Utils.logInfo("Getting data metric");
+         let response = await self._sfmcRestApiHelper.doGet(Constants.SfmcMetricTestUrl, postBody);
+         if(response.statusTxt == Constants.Success)
+         {
+             // TBD: parse 'response.data' to get count and return it
+             metricCount = 10;
+             Utils.logInfo("Successfully got Metric value: " + metricCount);
+             return metricCount;
+         }
+         else
+         {
+             Utils.logError("Error getting Contact count - check console logs  - " + response.data);
+             return 0;
+         }   
+    }
+
     /*
     * createContact: creates a new Contact in Marketing Cloud
     * See: https://developer.salesforce.com/docs/atlas.en-us.mc-apis.meta/mc-apis/createContacts.htm
@@ -126,7 +153,7 @@ class SfmcApiSingleton
        };
      
         // Get Contact Ccount
-        Utils.logInfo(`Getting count of Contacts`);
+        Utils.logInfo("Getting count of Contacts");
         let response = await self._sfmcRestApiHelper.doPost(Constants.SfmcApiContactsUrl, postBody);
         if(response.statusTxt == Constants.Success)
         {
