@@ -2,8 +2,8 @@
 .DS_Store
 dist
 
-.ask/
-skills.json
+/**/.ask
+skill.json
 
 # Dependency directories
 /**/node_modules
