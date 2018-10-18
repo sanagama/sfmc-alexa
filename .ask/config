@@ -17,11 +17,11 @@
       },
       "resources": {
         "manifest": {
-          "eTag": "0067304656ae88cb28493e071288637e"
+          "eTag": "b2f9f144b7fc549ddafc45bd311e6c80"
         },
         "interactionModel": {
           "en-US": {
-            "eTag": "61b2f6abaf00ea3d39c776906a7fc78e"
+            "eTag": "f3a35d5f330bb9ac9b6e35d8cec6e4d9"
           }
         }
       }
